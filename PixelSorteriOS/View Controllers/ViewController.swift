@@ -11,28 +11,38 @@ import Photos
 
 class ViewController: UIViewController, UINavigationControllerDelegate {
     
+    @IBOutlet weak var indicatorBackgroundView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var processedImageView: UIImageView!
     @IBOutlet weak var saveImageButton: UIButton!
     @IBOutlet weak var processFullImageButton: UIButton!
     @IBOutlet weak var processSmallerImageButton: UIButton!
     @IBOutlet weak var photoLibraryButton: UIButton!
+    @IBOutlet var bottomButtons: [UIButton]!
     
     var shouldProcessFullImage = true
     
-    let opQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.qualityOfService = .userInteractive
-        queue.maxConcurrentOperationCount = 4
-        return queue
-    }()
+    /// The number of operations that should be run to sort a split array of pixels. 4 seems to be the most efficient
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        photoLibraryButton.isHidden = true
+        indicatorBackgroundView.isHidden = true
+        saveImageButton.alpha = 0
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        saveImageButton.layer.cornerRadius = 8
-        processFullImageButton.layer.cornerRadius = 8
-        processSmallerImageButton.layer.cornerRadius = 8
-        photoLibraryButton.layer.cornerRadius = 8
+        bottomButtons.forEach({
+            $0.layer.cornerRadius = 8
+            $0.layer.borderColor = UIColor.lightGray.cgColor
+            $0.layer.borderWidth = 1
+        })
+        
+        indicatorBackgroundView.layer.cornerRadius = 8
     }
     
     // MARK: - Actions
@@ -48,9 +58,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func saveImageButtonTapped(_ sender: Any) {
-        
         guard let image = processedImageView.image else { return }
-        
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
@@ -67,73 +75,27 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         present(picker, animated: true, completion: nil)
     }
     
+    private func startIndicator() {
+        indicatorBackgroundView.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    private func stopIndicator() {
+        indicatorBackgroundView.isHidden = true
+        activityIndicator.stopAnimating()
+    }
     
     
     private func process(image: UIImage) {
-        
-        UIGraphicsBeginImageContext(image.size)
-        
-        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        
-        guard let context = UIGraphicsGetCurrentContext() else { print("No graphics context"); return }
-        
-        let width = Int(image.size.width)
-        let height = Int(image.size.height)
-        
-        guard let data = context.data?.assumingMemoryBound(to: UInt8.self) else { print("No data"); return }
-        
-        var pixels: [Pixel] = []
-        
-        for x in 0..<width {
-            for y in 0..<height {
-                let pixelAddress = context.bytesPerRow * y + (4 * x)
-                let blue = data[pixelAddress]
-                let green = data[pixelAddress + 1]
-                let red = data[pixelAddress + 2]
-                let alpha = data[pixelAddress + 3]
-                
-                let total = Int(red) + Int(green) + Int(blue) + Int(alpha)
-                
-                let pixel = Pixel(blue: blue, green: green, red: red, alpha: alpha, total: total)
-                
-                pixels.append(pixel)
-            }
-            
-        }
-        
-        var pixelArrays: [[Pixel]] = pixels.chunked(into: pixels.count / 4)
-        
-        for i in 0..<pixelArrays.count {
-            opQueue.addOperation {
-                pixelArrays[i].sort(by: { $0.total > $1.total })
-            }
-        }
-        
-        opQueue.waitUntilAllOperationsAreFinished()
-        
-        pixels = pixelArrays.flatMap({$0})
-        
-        pixels.sort(by: { $0.total > $1.total })
-        
-        var index = 0
-        
-        for pixel in pixels {
-            
-            data[index] = pixel.blue
-            data[index + 1] = pixel.green
-            data[index + 2] = pixel.red
-            data[index + 3] = pixel.alpha
-            index += 4
-        }
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
+        let sortedImage = PixelSorter.process(image: image, with: 4)
         DispatchQueue.main.async {
+            self.stopIndicator()
+            self.saveImageButton.alpha = 1
             
-            UIView.transition(with: self.processedImageView, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.processedImageView.image = newImage
+            UIView.transition(with: self.processedImageView,
+                              duration: 0.75,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                                self.processedImageView.image = sortedImage
             })
         }
     }
@@ -144,22 +106,22 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
 extension ViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+            let correctedImage = originalImage.upOrientationImage() else { return }
+        
+        startIndicator()
+        self.processedImageView.image = correctedImage
+        
         picker.dismiss(animated: true) {
             
-            guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-            
-            self.processedImageView.image = image
-            
-            guard self.shouldProcessFullImage else {
+            DispatchQueue.global().async {
                 
-                if let scaledImage = image.imageByScaling(toSize: image.size.scaledSize(maxLargerDimension: 1300)) {
+                if self.shouldProcessFullImage {
+                    self.process(image: correctedImage)
+                } else if let scaledImage = correctedImage.imageByScaling(toSize: correctedImage.size.scaledSize(maxLargerDimension: 1000)) {
                     self.process(image: scaledImage)
                 }
-                
-                return
             }
-            
-            self.process(image: image)
         }
     }
 }

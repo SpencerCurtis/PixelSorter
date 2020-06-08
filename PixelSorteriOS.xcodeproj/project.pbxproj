@@ -18,6 +18,7 @@
 		466D200222B36B43008EBDAF /* PhotoLibraryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D200122B36B43008EBDAF /* PhotoLibraryCollectionViewController.swift */; };
 		466D200422B36CB7008EBDAF /* PhotoAssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D200322B36CB7008EBDAF /* PhotoAssetCollectionViewCell.swift */; };
 		466D200622B36EF4008EBDAF /* CGSize+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D200522B36EF4008EBDAF /* CGSize+AspectRatio.swift */; };
+		46A2B79C248DEF8D0004338F /* PixelSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A2B79B248DEF8D0004338F /* PixelSorter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		466D200122B36B43008EBDAF /* PhotoLibraryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryCollectionViewController.swift; sourceTree = "<group>"; };
 		466D200322B36CB7008EBDAF /* PhotoAssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		466D200522B36EF4008EBDAF /* CGSize+AspectRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+AspectRatio.swift"; sourceTree = "<group>"; };
+		46A2B79B248DEF8D0004338F /* PixelSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelSorter.swift; path = PixelSorteriOS/Storyboards/PixelSorter.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		4650CC0223A1B2BF00399E29 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				46A2B79B248DEF8D0004338F /* PixelSorter.swift */,
 				4650CC0A23A1B3D500399E29 /* Array+Chunked.swift */,
 				466D200522B36EF4008EBDAF /* CGSize+AspectRatio.swift */,
 				4650CC0823A1B3BF00399E29 /* UIImage+Scaling.swift */,
@@ -208,6 +211,7 @@
 				466D200222B36B43008EBDAF /* PhotoLibraryCollectionViewController.swift in Sources */,
 				466D200422B36CB7008EBDAF /* PhotoAssetCollectionViewCell.swift in Sources */,
 				4650CC0623A1B39700399E29 /* Pixel.swift in Sources */,
+				46A2B79C248DEF8D0004338F /* PixelSorter.swift in Sources */,
 				461DD23C20A4361A00E7FF73 /* AppDelegate.swift in Sources */,
 				4650CC0923A1B3BF00399E29 /* UIImage+Scaling.swift in Sources */,
 			);
@@ -356,6 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4BT774F98;
 				INFOPLIST_FILE = PixelSorteriOS/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -374,6 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4BT774F98;
 				INFOPLIST_FILE = PixelSorteriOS/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

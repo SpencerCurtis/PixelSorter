@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eik-g4-k4y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a81-Bo-Fev">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,14 +20,13 @@
                                 <rect key="frame" x="10" y="52" width="355" height="599"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1F8-YX-nzt">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="523"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="485"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mxx-Zn-M9E">
-                                        <rect key="frame" x="0.0" y="531" width="355" height="30"/>
+                                        <rect key="frame" x="0.0" y="493" width="355" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-nh-6PU">
                                                 <rect key="frame" x="0.0" y="0.0" width="173.5" height="30"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Process Full Image"/>
                                                 <connections>
                                                     <action selector="processFullImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xIW-3b-Ycy"/>
@@ -35,7 +34,6 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSJ-Vy-eXx">
                                                 <rect key="frame" x="181.5" y="0.0" width="173.5" height="30"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Process Smaller Image"/>
                                                 <connections>
                                                     <action selector="processSmallerImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QTL-b1-vgt"/>
@@ -43,9 +41,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-hD-I58">
-                                        <rect key="frame" x="0.0" y="565" width="355" height="0.0"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEY-hD-I58">
+                                        <rect key="frame" x="0.0" y="531" width="355" height="30"/>
                                         <state key="normal" title="Library"/>
                                         <connections>
                                             <segue destination="sUn-Uf-bzh" kind="show" id="oMQ-Zo-a1W"/>
@@ -53,7 +50,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8yd-Ec-3Rg">
                                         <rect key="frame" x="0.0" y="569" width="355" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Save Image"/>
                                         <connections>
                                             <action selector="saveImageButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="he0-yt-Uw7"/>
@@ -64,9 +60,38 @@
                                     <constraint firstItem="8yd-Ec-3Rg" firstAttribute="width" secondItem="mxx-Zn-M9E" secondAttribute="width" id="ln3-MV-lLU"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bA1-RJ-xSQ">
+                                <rect key="frame" x="127.5" y="295.5" width="120" height="120"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="MoX-hc-qhn">
+                                        <rect key="frame" x="25" y="33" width="70" height="70.5"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Z7o-pE-1kA">
+                                                <rect key="frame" x="16.5" y="0.0" width="37" height="37"/>
+                                                <color key="color" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorting..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNo-TS-3kH">
+                                                <rect key="frame" x="0.0" y="50" width="70" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="IndicatorView"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Fna-Bz-I0b"/>
+                                    <constraint firstItem="MoX-hc-qhn" firstAttribute="centerY" secondItem="bA1-RJ-xSQ" secondAttribute="centerY" constant="8" id="GUA-Qy-LDb"/>
+                                    <constraint firstItem="MoX-hc-qhn" firstAttribute="centerX" secondItem="bA1-RJ-xSQ" secondAttribute="centerX" id="hRv-Bm-ivX"/>
+                                    <constraint firstAttribute="width" constant="120" id="m4h-xg-ydM"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="bA1-RJ-xSQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3aZ-gp-Lss"/>
+                            <constraint firstItem="bA1-RJ-xSQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="5Wc-sd-4dp"/>
                             <constraint firstItem="cOJ-uF-sAc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="EdL-b0-gwo"/>
                             <constraint firstItem="cOJ-uF-sAc" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" constant="-20" id="ICO-Nf-Jny"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cOJ-uF-sAc" secondAttribute="bottom" constant="16" id="LfD-Bi-gZS"/>
@@ -76,16 +101,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="FSw-zJ-qTf"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Z7o-pE-1kA" id="HoU-tO-ct1"/>
+                        <outlet property="indicatorBackgroundView" destination="bA1-RJ-xSQ" id="Jk7-kz-NU0"/>
                         <outlet property="photoLibraryButton" destination="dEY-hD-I58" id="pR6-Pg-e7U"/>
                         <outlet property="processFullImageButton" destination="kKa-nh-6PU" id="C7b-HH-usw"/>
                         <outlet property="processSmallerImageButton" destination="cSJ-Vy-eXx" id="ASg-PK-1gi"/>
                         <outlet property="processedImageView" destination="1F8-YX-nzt" id="MlH-bM-8fE"/>
                         <outlet property="saveImageButton" destination="8yd-Ec-3Rg" id="176-Lz-vFb"/>
+                        <outletCollection property="bottomButtons" destination="kKa-nh-6PU" collectionClass="NSMutableArray" id="10C-2B-QBH"/>
+                        <outletCollection property="bottomButtons" destination="cSJ-Vy-eXx" collectionClass="NSMutableArray" id="1jh-5T-roT"/>
+                        <outletCollection property="bottomButtons" destination="dEY-hD-I58" collectionClass="NSMutableArray" id="qy3-2V-a3A"/>
+                        <outletCollection property="bottomButtons" destination="8yd-Ec-3Rg" collectionClass="NSMutableArray" id="oCS-jf-7fn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2015.2" y="133.5832083958021"/>
         </scene>
         <!--Title-->
         <scene sceneID="Y24-U7-3RA">
@@ -152,25 +183,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UxG-vp-JRj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2791.1999999999998" y="133.5832083958021"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="J8n-rL-X1n">
+        <scene sceneID="Css-NJ-GnM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eik-g4-k4y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a81-Bo-Fev" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iMe-aS-0wX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tm3-Cs-3az">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="h5X-OL-3De"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="8u8-rA-z4j"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DNS-PA-OrV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHv-gp-54M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="IndicatorView">
+            <color red="1" green="1" blue="1" alpha="0.75400000810623169" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
